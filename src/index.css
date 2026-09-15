@@ -4,12 +4,319 @@
   padding: 0;
 }
 
+/* permite animar la propiedad CSS custom --border-angle */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: #0f0f11;
-  color: #e8e8e8;
+  background: #07070f;
+  color: #e8e8f0;
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Orbes de fondo animados ── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(90px);
+}
+
+.orb-1 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, #6d28d9 0%, transparent 70%);
+  top: -300px;
+  left: -200px;
+  opacity: 0.28;
+  animation: float-1 14s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #1d4ed8 0%, transparent 70%);
+  bottom: -250px;
+  right: -150px;
+  opacity: 0.22;
+  animation: float-2 18s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, #db2777 0%, transparent 70%);
+  top: 40%;
+  right: 15%;
+  opacity: 0.1;
+  animation: float-3 11s ease-in-out infinite;
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(45px, 30px) scale(1.06); }
+  66%       { transform: translate(-20px, 45px) scale(0.95); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-35px, -25px) scale(1.08); }
+  66%       { transform: translate(30px, -35px) scale(0.96); }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0); }
+  50%       { transform: translate(-45px, 25px); }
+}
+
+/* ── Card wrapper: borde con gradiente giratorio ── */
+.card-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  padding: 1px;
+  border-radius: 25px;
+  --border-angle: 0deg;
+  background: conic-gradient(
+    from var(--border-angle) at 50% 50%,
+    transparent 0%,
+    rgba(109, 40, 217, 0.9) 20%,
+    rgba(59, 130, 246, 0.9) 45%,
+    rgba(196, 181, 253, 0.7) 65%,
+    transparent 80%
+  );
+  animation: rotate-border 5s linear infinite;
+}
+
+@keyframes rotate-border {
+  to { --border-angle: 360deg; }
+}
+
+/* ── Card ── */
+.card {
+  width: 100%;
+  background: rgba(9, 8, 18, 0.88);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+/* ── Título ── */
+.title {
+  font-size: 3rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #c4b5fd 0%, #818cf8 40%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-glow 4s ease-in-out infinite;
+}
+
+@keyframes title-glow {
+  0%, 100% { filter: brightness(1); }
+  50%       { filter: brightness(1.35) drop-shadow(0 0 28px rgba(167, 139, 250, 0.65)); }
+}
+
+.subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.32);
+  font-size: 0.95rem;
+  margin-top: -0.75rem;
+}
+
+/* ── Formulario ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.45);
+  color: #e8e8f0;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.input:focus {
+  border-color: rgba(139, 92, 246, 0.75);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15), 0 0 22px rgba(139, 92, 246, 0.12);
+}
+
+/* ── Botón con shimmer ── */
+.btn-shorten {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0.9rem;
+  border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 22px rgba(124, 58, 237, 0.5);
+}
+
+.btn-shorten::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-15deg);
+}
+
+.btn-shorten:hover:not(:disabled)::after {
+  animation: shimmer 0.65s ease forwards;
+}
+
+.btn-shorten:hover:not(:disabled) {
+  opacity: 0.92;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.7);
+}
+
+.btn-shorten:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-shorten:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+@keyframes shimmer {
+  to { left: 150%; }
+}
+
+/* ── Spinner ── */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Error ── */
+.error {
+  color: #fca5a5;
+  font-size: 0.88rem;
+  text-align: center;
+  animation: fadeIn 0.25s ease;
+}
+
+/* ── Resultado ── */
+.result {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(109, 40, 217, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 24px rgba(109, 40, 217, 0.12);
+}
+
+.result-link {
+  flex: 1;
+  color: #c4b5fd;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.result-link:hover {
+  color: #ddd6fe;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.btn-copy {
+  flex-shrink: 0;
+  padding: 0.45rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8e8f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+
+.btn-copy:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.04);
+}
+
+.btn-copy.copied {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: rgba(52, 211, 153, 0.4);
+  color: #6ee7b7;
+}
+
+/* ── Animaciones ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
