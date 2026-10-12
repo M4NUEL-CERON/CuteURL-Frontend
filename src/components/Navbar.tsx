@@ -1,5 +1,6 @@
 import { useApp } from '../context/AppContext'
 import { translations } from '../translations'
+import logoSvg from '../Aseets/Logo Cute URL.svg'
 
 export default function Navbar() {
   const { lang, toggleLang } = useApp()
@@ -10,7 +11,7 @@ export default function Navbar() {
       <div className="navbar__inner">
 
         <a href="#" className="navbar__logo">
-          🔗 cute<span className="navbar__logo-dot">url</span>
+          <img src={logoSvg} alt="CuteURL" className="navbar__logo-img" />
         </a>
 
         <ul className="navbar__links">
@@ -25,7 +26,6 @@ export default function Navbar() {
             <span className="lang-switch__divider">|</span>
             <span className={`lang-switch__opt${lang === 'en' ? ' active' : ''}`}>EN</span>
           </button>
-          <a href="#shorten" className="btn btn-primary">{tr.cta}</a>
         </div>
 
       </div>

@@ -1,5 +1,6 @@
 import { useApp } from '../context/AppContext'
 import { translations } from '../translations'
+import logoSvg from '../Aseets/Logo Cute URL.svg'
 
 export default function Footer() {
   const { lang } = useApp()
@@ -8,7 +9,7 @@ export default function Footer() {
   return (
     <footer>
       <div className="footer">
-        <span className="footer__logo grad-text">🔗 cuteurl</span>
+        <img src={logoSvg} alt="CuteURL" className="footer__logo-img" />
         <div className="footer__links">
           <a href="#how">{tr.how}</a>
           <a href="#features">{tr.features}</a>

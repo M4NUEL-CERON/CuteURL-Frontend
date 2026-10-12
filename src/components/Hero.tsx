@@ -1,6 +1,7 @@
 import CatIllustration from './CatIllustration'
 import { useApp } from '../context/AppContext'
 import { translations } from '../translations'
+import arrowSvg from '../Aseets/Flecha dibujada.svg'
 
 export default function Hero() {
   const { lang } = useApp()
@@ -12,6 +13,9 @@ export default function Hero() {
         <div className="hero__inner">
           <div className="hero__content">
             <div className="hero__badge">{tr.badge}</div>
+            <div className="hero__arrow-wrap">
+              <img src={arrowSvg} className="hero__arrow" alt="" aria-hidden="true" />
+            </div>
             <h1 className="hero__title">
               {tr.title1}<br />
               <span className="grad-text">{tr.title2}</span>
