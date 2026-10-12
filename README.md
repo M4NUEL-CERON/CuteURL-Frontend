@@ -14,6 +14,19 @@
 
 ---
 
+## Qué incluye el landing
+
+- **Navbar** — sticky, con links a cada sección y switch de idioma **ES/EN**.
+- **Hero** — titular, stats destacados (rápido, sin registro, simple) e ilustración del gato.
+- **Shortener** — formulario para pegar una URL larga y obtener el link corto al instante, con botón de copiar.
+- **Features** — 4 tarjetas con los diferenciales del producto (resultados instantáneos, links limpios, confiable, API sencilla).
+- **Cómo funciona** — los 3 pasos del flujo (pegar, acortar, compartir) junto a una comparación visual antes/después.
+- **Footer** — CTA final, logo, y links a GitHub y LinkedIn.
+
+Todo el contenido está disponible en español e inglés (`src/translations.ts`).
+
+---
+
 ## Stack
 
 - **React 18** + **TypeScript**

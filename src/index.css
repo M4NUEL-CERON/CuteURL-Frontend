@@ -4,17 +4,17 @@
   --color-primary:       #4F46E5;
   --color-primary-light: #818CF8;
   --color-muted:         rgba(79,70,229,0.5);
-  --color-app-bg:        #f5f5ff;
+  --color-app-bg:        #ffffff;
   --color-app-text:      #1e1b4b;
   --color-border:        rgba(79,70,229,0.12);
   --color-card:          rgba(255,255,255,0.85);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background-color: #f5f5ff;
+  background-color: #ffffff;
   color: #1e1b4b;
   overflow-x: hidden;
 }

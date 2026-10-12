@@ -5,7 +5,6 @@ import Hero from './components/Hero'
 import Shortener from './components/Shortener'
 import Features from './components/Features'
 import HowItWorks from './components/HowItWorks'
-import CallToAction from './components/CallToAction'
 import Footer from './components/Footer'
 
 export default function App() {
@@ -17,7 +16,6 @@ export default function App() {
         <Shortener />
         <Features />
         <HowItWorks />
-        <CallToAction />
       </main>
       <Footer />
     </AppProvider>
