@@ -1,0 +1,108 @@
+export const translations = {
+  es: {
+    nav: {
+      how: 'Cómo funciona', features: 'Características',
+      shorten: 'Acortar', cta: 'Empezar gratis',
+    },
+    hero: {
+      badge: '🔗 Acortador de links gratuito',
+      title1: 'Links más cortos.',
+      title2: 'Más posibilidades.',
+      subtitle: 'CuteURL es un acortador de links simple y rápido. Pega tu URL larga y obtén una corta y limpia en segundos.',
+      stat1: 'Gratuito', stat2: 'Registro requerido', stat3: 'Por link',
+      cta: 'Acortar mi link →',
+    },
+    shortener: {
+      title: '✂️ Acorta tu URL',
+      sub: 'Pega tu link largo y obtén uno corto al instante',
+      placeholder: 'https://tu-link-muy-largo.com/con/muchos/parametros',
+      btn: 'Acortar →',
+      errorInvalid: 'URL inválida. Asegúrate de incluir https://',
+      errorConn: 'No se pudo conectar con el servidor.',
+      copy: 'Copiar', copied: '✓ Copiado',
+    },
+    features: {
+      label: 'Características',
+      title1: 'Todo lo que necesitas,',
+      title2: 'nada que no necesitas',
+      sub: 'Sin tracking, sin cuentas, sin complicaciones. Solo acorta tu link y compártelo.',
+      items: [
+        { icon: '⚡', title: 'Resultados instantáneos', desc: 'Tu link corto se genera en milisegundos. Sin esperas.' },
+        { icon: '🔗', title: 'Limpio y legible', desc: 'Links cortos y fáciles de compartir en redes, emails o mensajes.' },
+        { icon: '🛡️', title: 'Confiable', desc: 'Tus links. Siempre disponibles. Sin interrupciones.' },
+        { icon: '</>', title: 'API sencilla', desc: 'Integra el shortener en tus apps. Un solo endpoint REST.' },
+      ],
+    },
+    how: {
+      label: 'Cómo funciona',
+      title1: 'Tres pasos.',
+      title2: 'Un link cute.',
+      steps: [
+        { title: 'Pega tu URL larga', desc: 'Copia el link que quieres acortar y pégalo en el campo de texto.' },
+        { title: 'Haz clic en Acortar', desc: 'Presiona el botón y tu link corto se genera al instante.' },
+        { title: 'Compártelo', desc: 'Copia tu link corto y compártelo donde quieras. Siempre funciona.' },
+      ],
+      before: 'Antes', after: 'Después',
+    },
+    cta: {
+      title1: '¿Listo para hacer tus',
+      title2: 'links más cute?',
+      sub: 'Gratis, sin registro, sin límites.',
+      btn: 'Empezar ahora →',
+    },
+    footer: { how: 'Cómo funciona', features: 'Características', backend: 'Backend' },
+  },
+  en: {
+    nav: {
+      how: 'How it works', features: 'Features',
+      shorten: 'Shorten', cta: 'Start for free',
+    },
+    hero: {
+      badge: '🔗 Free link shortener',
+      title1: 'Shorter links.',
+      title2: 'Bigger possibilities.',
+      subtitle: 'CuteURL is a simple and fast link shortener. Paste your long URL and get a short, clean one in seconds.',
+      stat1: 'Free', stat2: 'Sign up required', stat3: 'Per link',
+      cta: 'Shorten my link →',
+    },
+    shortener: {
+      title: '✂️ Shorten your URL',
+      sub: 'Paste your long link and get a short one instantly',
+      placeholder: 'https://your-very-long-link.com/with/many/params',
+      btn: 'Shorten →',
+      errorInvalid: 'Invalid URL. Make sure to include https://',
+      errorConn: 'Could not connect to the server.',
+      copy: 'Copy', copied: '✓ Copied',
+    },
+    features: {
+      label: 'Features',
+      title1: 'Everything you need,',
+      title2: "nothing you don't",
+      sub: 'No tracking, no accounts, no hassle. Just shorten your link and share it.',
+      items: [
+        { icon: '⚡', title: 'Instant results', desc: 'Your short link is generated in milliseconds. No waiting.' },
+        { icon: '🔗', title: 'Clean & readable', desc: 'Short links easy to share on socials, emails or messages.' },
+        { icon: '🛡️', title: 'Reliable', desc: 'Your links. Always available. No interruptions.' },
+        { icon: '</>', title: 'Simple API', desc: 'Integrate the shortener into your apps. One REST endpoint.' },
+      ],
+    },
+    how: {
+      label: 'How it works',
+      title1: 'Three steps.',
+      title2: 'One cute link.',
+      steps: [
+        { title: 'Paste your long URL', desc: 'Copy the link you want to shorten and paste it in the text field.' },
+        { title: 'Click Shorten', desc: 'Press the button and your short link is generated instantly.' },
+        { title: 'Share it', desc: 'Copy your short link and share it anywhere. It always works.' },
+      ],
+      before: 'Before', after: 'After',
+    },
+    cta: {
+      title1: 'Ready to make your',
+      title2: 'links more cute?',
+      sub: 'Free, no sign up, no limits.',
+      btn: 'Start now →',
+    },
+    footer: { how: 'How it works', features: 'Features', backend: 'Backend' },
+  },
+}
