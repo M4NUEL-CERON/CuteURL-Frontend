@@ -7,24 +7,30 @@ export default function Navbar() {
   const tr = translations[lang].nav
 
   return (
-    <nav className="navbar">
-      <div className="navbar__inner">
+    <nav className="sticky top-0 z-[100] backdrop-blur-xl border-b border-transparent">
+      <div className="flex items-center max-w-[1100px] mx-auto px-6 py-4">
 
-        <a href="#" className="navbar__logo">
-          <img src={logoSvg} alt="CuteURL" className="navbar__logo-img" />
+        <a href="#" className="flex items-center shrink-0">
+          <img src={logoSvg} alt="CuteURL" className="h-8 w-auto" />
         </a>
 
-        <ul className="navbar__links">
-          <li><a href="#how">{tr.how}</a></li>
-          <li><a href="#features">{tr.features}</a></li>
-          <li><a href="#shorten">{tr.shorten}</a></li>
+        <ul className="flex gap-7 list-none text-[0.88rem] flex-1 justify-center"
+            style={{ color: 'rgba(79,70,229,0.5)' }}>
+          <li><a href="#how"      className="no-underline transition-colors hover:text-[#1e1b4b]" style={{ color: 'inherit' }}>{tr.how}</a></li>
+          <li><a href="#features" className="no-underline transition-colors hover:text-[#1e1b4b]" style={{ color: 'inherit' }}>{tr.features}</a></li>
+          <li><a href="#shorten"  className="no-underline transition-colors hover:text-[#1e1b4b]" style={{ color: 'inherit' }}>{tr.shorten}</a></li>
         </ul>
 
-        <div className="navbar__right">
-          <button className="lang-switch" onClick={toggleLang} aria-label="Toggle language">
-            <span className={`lang-switch__opt${lang === 'es' ? ' active' : ''}`}>ES</span>
-            <span className="lang-switch__divider">|</span>
-            <span className={`lang-switch__opt${lang === 'en' ? ' active' : ''}`}>EN</span>
+        <div className="flex items-center shrink-0">
+          <button
+            onClick={toggleLang}
+            aria-label="Toggle language"
+            className="flex items-center gap-1.5 bg-white/80 border border-[rgba(79,70,229,0.12)] rounded-lg px-2.5 py-1.5 text-[0.78rem] font-semibold cursor-pointer hover:border-primary-light transition-colors"
+            style={{ color: 'rgba(79,70,229,0.5)' }}
+          >
+            <span style={{ color: lang === 'es' ? '#818CF8' : 'inherit' }}>ES</span>
+            <span style={{ color: 'rgba(79,70,229,0.2)' }}>|</span>
+            <span style={{ color: lang === 'en' ? '#818CF8' : 'inherit' }}>EN</span>
           </button>
         </div>
 

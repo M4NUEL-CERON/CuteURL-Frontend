@@ -42,35 +42,61 @@ export default function Shortener() {
   }
 
   return (
-    <section id="shorten" className="shortener">
-      <div className="container">
-        <div className="shortener__card">
-          <h2 className="shortener__title">{tr.title}</h2>
-          <p className="shortener__sub">{tr.sub}</p>
+    <section id="shorten" className="pb-24">
+      <div className="max-w-[1100px] mx-auto px-6">
+        <div
+          className="bg-white/85 backdrop-blur-xl border border-[rgba(79,70,229,0.12)] rounded-3xl p-12 max-w-[700px] mx-auto"
+          style={{ boxShadow: '0 0 80px rgba(79,70,229,0.08)' }}
+        >
+          <h2 className="text-[1.6rem] font-bold text-center mb-2 text-[#1e1b4b]">{tr.title}</h2>
+          <p className="text-center text-[0.9rem] mb-7" style={{ color: 'rgba(79,70,229,0.5)' }}>{tr.sub}</p>
 
-          <form onSubmit={handleShorten} className="shortener__form">
+          <form onSubmit={handleShorten} className="flex flex-col gap-3">
             <input
-              className="shortener__input"
               type="url"
               placeholder={tr.placeholder}
               value={inputUrl}
               onChange={e => setInputUrl(e.target.value)}
               required
               autoFocus
+              className="w-full px-5 py-4 rounded-[14px] border border-[rgba(79,70,229,0.12)] bg-white text-[#1e1b4b] text-[0.97rem] outline-none transition-all focus:border-primary focus:ring-[3px] focus:ring-primary/10 placeholder:text-[rgba(79,70,229,0.3)]"
             />
-            <button className="shortener__btn" type="submit" disabled={loading}>
-              {loading ? <span className="spinner" /> : tr.btn}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-4 rounded-[14px] bg-grad text-white font-bold text-[0.97rem] cursor-pointer transition-all hover:opacity-90 hover:-translate-y-0.5 disabled:opacity-55 disabled:cursor-not-allowed"
+              style={{ boxShadow: '0 4px 22px rgba(79,70,229,0.4)' }}
+            >
+              {loading
+                ? <span className="inline-block w-[18px] h-[18px] border-[2.5px] border-white/30 border-t-white rounded-full animate-spin-slow align-middle" />
+                : tr.btn}
             </button>
           </form>
 
-          {error && <p className="shortener__error">{error}</p>}
+          {error && (
+            <p className="text-[#ef4444] text-[0.88rem] text-center mt-3">{error}</p>
+          )}
 
           {shortUrl && (
-            <div className="shortener__result">
-              <a className="shortener__link" href={shortUrl} target="_blank" rel="noreferrer">
+            <div
+              className="flex items-center gap-3 bg-primary/[0.08] border border-primary/25 rounded-[14px] px-5 py-4 mt-3 animate-slide-up"
+            >
+              <a
+                href={shortUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex-1 text-primary text-[0.95rem] font-medium overflow-hidden text-ellipsis whitespace-nowrap no-underline hover:opacity-75 transition-opacity"
+              >
                 {shortUrl}
               </a>
-              <button className={`btn-copy${copied ? ' copied' : ''}`} onClick={handleCopy}>
+              <button
+                onClick={handleCopy}
+                className={`shrink-0 px-4 py-2 rounded-[10px] border text-[0.83rem] font-semibold cursor-pointer transition-all whitespace-nowrap
+                  ${copied
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-600'
+                    : 'bg-white border-[rgba(79,70,229,0.12)] text-[#1e1b4b] hover:border-primary-light'
+                  }`}
+              >
                 {copied ? tr.copied : tr.copy}
               </button>
             </div>
