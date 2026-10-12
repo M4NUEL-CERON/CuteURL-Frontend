@@ -2,16 +2,12 @@ import { useApp } from '../context/AppContext'
 import { translations } from '../translations'
 
 export default function Navbar() {
-  const { theme, lang, toggleTheme, toggleLang } = useApp()
+  const { lang, toggleLang } = useApp()
   const tr = translations[lang].nav
 
   return (
     <nav className="navbar">
       <div className="navbar__inner">
-
-        <button className="navbar__icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
-          {theme === 'dark' ? '🌙' : '☀️'}
-        </button>
 
         <a href="#" className="navbar__logo">
           🔗 cute<span className="navbar__logo-dot">url</span>
