@@ -2,15 +2,17 @@
 
 > Acorta cualquier link al instante. Interfaz web para el servicio [CuteURL](https://github.com/M4NUEL-CERON/CuteURL).
 
-![demo](docs/demo.png)
+🔗 **App en vivo:** [m4nuel-ceron.github.io/CuteURL-Frontend](https://m4nuel-ceron.github.io/CuteURL-Frontend/)
+
+![demo](docs/demo.jpg)
 
 ---
 
 ## Vista previa
 
-| Inicio | Link acortado |
-|--------|--------------|
-| ![inicio](docs/screenshot-inicio.png) | ![resultado](docs/screenshot-resultado.png) |
+| Hero | Footer |
+|------|--------|
+| ![hero](docs/screenshot-hero.jpg) | ![footer](docs/screenshot-footer.jpg) |
 
 ---
 
@@ -78,11 +80,11 @@ La app queda disponible en `http://localhost:5173`.
 
 ## Deploy
 
-El deploy es automático via GitHub Actions cada vez que haces push a `main`.
+El deploy es automático via GitHub Actions cada vez que haces push a `main`, y queda publicado en [m4nuel-ceron.github.io/CuteURL-Frontend](https://m4nuel-ceron.github.io/CuteURL-Frontend/).
 
-### Configuración necesaria (una sola vez)
+### Configuración necesaria (una sola vez — ya hecha en este repo)
 
-1. En GitHub: **Settings → Pages → Source → GitHub Actions**
+1. En GitHub: **Settings → Pages → Source → GitHub Actions** ✅
 2. En GitHub: **Settings → Secrets → Actions** — agregar:
 
 | Secret | Valor |
@@ -99,7 +101,4 @@ El deploy es automático via GitHub Actions cada vez que haces push a `main`.
 
 ---
 
-## Repositorio del backend
-
-El backend (Spring Boot + Redis) vive en un repo separado:
-👉 [M4NUEL-CERON/CuteURL](https://github.com/M4NUEL-CERON/CuteURL)
+El backend (Spring Boot + Redis) vive en [M4NUEL-CERON/CuteURL](https://github.com/M4NUEL-CERON/CuteURL).
