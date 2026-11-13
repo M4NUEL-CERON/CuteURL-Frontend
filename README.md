@@ -1,104 +1,55 @@
 # CuteURL — Frontend
 
-> Acorta cualquier link al instante. Interfaz web para el servicio [CuteURL](https://github.com/M4NUEL-CERON/CuteURL).
+A no-signup URL shortener: paste a long link, get a short one that redirects for 30 days. This is the React landing page and form; the API lives in [CuteURL_Backend](https://github.com/M4NUEL-CERON/CuteURL_Backend) (Spring Boot + Redis).
 
-🔗 **App en vivo:** [m4nuel-ceron.github.io/CuteURL-Frontend](https://m4nuel-ceron.github.io/CuteURL-Frontend/)
+**Live demo:** [m4nuel-ceron.github.io/CuteURL-Frontend](https://m4nuel-ceron.github.io/CuteURL-Frontend/)
 
-![demo](docs/demo.jpg)
+> The API runs on Render's free tier and sleeps after 15 minutes idle. The first link can take up to a minute; the form says "Waking up the server…" instead of looking broken.
 
----
+![CuteURL landing page with the shortener form](docs/desktop.png)
 
-## Vista previa
+[Mobile screenshot](docs/mobile.png)
 
-| Hero | Footer |
-|------|--------|
-| ![hero](docs/screenshot-hero.jpg) | ![footer](docs/screenshot-footer.jpg) |
+## What it does
 
----
+- **One form, one request.** `POST /shorten` with the URL; the response's `shortUrl` is shown with a copy button and a note that it lasts 30 days.
+- **Honest states.** Loading spinner, a cold-start message after 3 s, a 90 s timeout, and distinct errors for an invalid URL (400) and an unreachable server.
+- **Spanish and English.** Opens in Spanish when the browser is set to Spanish and in English otherwise; the ES | EN switch flips it (`src/translations.ts`).
+- **Responsive.** Single column on phones, two columns from tablet up.
 
-## Qué incluye el landing
-
-- **Navbar** — sticky, con links a cada sección y switch de idioma **ES/EN**.
-- **Hero** — titular, stats destacados (rápido, sin registro, simple) e ilustración del gato.
-- **Shortener** — formulario para pegar una URL larga y obtener el link corto al instante, con botón de copiar.
-- **Features** — 4 tarjetas con los diferenciales del producto (resultados instantáneos, links limpios, confiable, API sencilla).
-- **Cómo funciona** — los 3 pasos del flujo (pegar, acortar, compartir) junto a una comparación visual antes/después.
-- **Footer** — CTA final, logo, y links a GitHub y LinkedIn.
-
-Todo el contenido está disponible en español e inglés (`src/translations.ts`).
-
----
-
-## Stack
-
-- **React 18** + **TypeScript**
-- **Vite 6** — build tool
-- **GitHub Pages** — hosting estático
-- **GitHub Actions** — deploy automático en cada push a `main`
-
----
-
-## Arquitectura
+## Architecture
 
 ```
-Usuario
-  │
-  ▼
-GitHub Pages          (este repo — archivos estáticos)
-  │  fetch POST /shorten
-  ▼
-Railway               (CuteURL backend — Spring Boot)
-  │  SETNX
-  ▼
-Redis Cloud           (almacenamiento clave-valor)
+Browser ── GitHub Pages (this repo, static build)
+   │  POST /shorten  {url}
+   ▼
+Render ── Spring Boot API (CuteURL_Backend)
+   │  SET url:{code} {url} NX EX 30d
+   ▼
+Redis Cloud
 ```
 
----
+`GET https://<api>/{code}` answers with a 302 to the original URL, so short links work without the frontend.
 
-## Desarrollo local
+## Run it locally
 
-### Requisitos
-- Node.js 20+
-- El [backend](https://github.com/M4NUEL-CERON/CuteURL) corriendo en `http://localhost:8080`
-
-### Pasos
+Start the backend first (`docker compose up` in [CuteURL_Backend](https://github.com/M4NUEL-CERON/CuteURL_Backend) gives you the API and a Redis on `:8080`), then:
 
 ```bash
-# 1. Instalar dependencias
 npm install
-
-# 2. Crear variables de entorno locales
-echo "VITE_API_URL=http://localhost:8080" > .env.local
-
-# 3. Arrancar el servidor de desarrollo
-npm run dev
+VITE_API_URL=http://localhost:8080 npm run dev
 ```
 
-La app queda disponible en `http://localhost:5173`.
-
----
+The app runs on http://localhost:5173, which is the backend's default allowed CORS origin.
 
 ## Deploy
 
-El deploy es automático via GitHub Actions cada vez que haces push a `main`, y queda publicado en [m4nuel-ceron.github.io/CuteURL-Frontend](https://m4nuel-ceron.github.io/CuteURL-Frontend/).
+`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push to `main`. It reads one repository secret:
 
-### Configuración necesaria (una sola vez — ya hecha en este repo)
+| Secret | Value |
+| --- | --- |
+| `VITE_API_URL` | Backend base URL, e.g. `https://cuteurl.onrender.com` (baked in at build time) |
 
-1. En GitHub: **Settings → Pages → Source → GitHub Actions** ✅
-2. En GitHub: **Settings → Secrets → Actions** — agregar:
+## Stack
 
-| Secret | Valor |
-|--------|-------|
-| `VITE_API_URL` | URL de tu backend en Railway |
-
----
-
-## Variables de entorno
-
-| Variable | Descripción | Ejemplo |
-|----------|-------------|---------|
-| `VITE_API_URL` | URL base del backend | `https://cuteurl.up.railway.app` |
-
----
-
-El backend (Spring Boot + Redis) vive en [M4NUEL-CERON/CuteURL](https://github.com/M4NUEL-CERON/CuteURL).
+React 18 · TypeScript · Vite 6 · Tailwind CSS 4 · GitHub Actions · GitHub Pages
