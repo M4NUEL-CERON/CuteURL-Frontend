@@ -18,9 +18,9 @@ export default function Hero() {
   ]
 
   return (
-    <section className="pt-10 pb-20 relative overflow-hidden">
+    <section className="pt-6 md:pt-10 pb-12 md:pb-20 relative overflow-hidden">
       <div className="max-w-[1100px] mx-auto px-6">
-        <div className="grid grid-cols-2  items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-0 items-center">
 
           <div>
             <div className="flex items-end gap-3 mb-3">
@@ -38,11 +38,11 @@ export default function Hero() {
               {tr.subtitle}
             </p>
 
-            <div className="flex gap-6 mb-9 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-6 mb-2 md:mb-9 w-full">
               {stats.map(s => (
                 <div key={s.label} className="flex items-center gap-2 flex-1 min-w-0">
                   <img src={s.icon} className="w-7 h-7 shrink-0" alt="" aria-hidden="true" />
-                  <div className="text-[0.78rem] leading-snug" style={{ color: 'rgba(79,70,229,0.5)' }}>{s.label}</div>
+                  <div className="text-[0.78rem] leading-snug" style={{ color: '#5B5FC7' }}>{s.label}</div>
                 </div>
               ))}
             </div>

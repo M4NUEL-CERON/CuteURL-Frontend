@@ -10,11 +10,13 @@ interface AppContextType {
 const AppContext = createContext<AppContextType>({} as AppContextType)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('es')
+  const [lang, setLang] = useState<Lang>(() => navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en')
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'light')
   }, [])
+
+  useEffect(() => { document.documentElement.lang = lang }, [lang])
 
   const toggleLang = () => setLang(l => l === 'es' ? 'en' : 'es')
 

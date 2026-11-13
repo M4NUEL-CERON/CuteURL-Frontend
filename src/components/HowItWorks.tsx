@@ -14,8 +14,8 @@ export default function HowItWorks() {
   return (
     <section id="how" className="pt-8 pb-24">
       <div className="max-w-[1100px] mx-auto px-6">
-        <div className="rounded-[32px] pt-8 pb-10 px-10 md:pt-10 md:pb-16 md:px-16" style={{ background: '#F2EDFF' }}>
-          <div className="grid grid-cols-2 gap-20 items-center">
+        <div className="rounded-[32px] pt-8 pb-10 px-6 sm:px-10 md:pt-10 md:pb-16 md:px-16" style={{ background: '#F2EDFF' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-center">
 
             <div>
               <p className="text-[2rem] font-bold" style={{ color: '#181E3B' }}>{tr.label}</p>
@@ -33,7 +33,7 @@ export default function HowItWorks() {
               </div>
             </div>
 
-            <img src={linkComparisonSvg} alt="" aria-hidden="true" className="w-full h-auto scale-110" />
+            <img src={linkComparisonSvg} alt="" aria-hidden="true" className="w-full h-auto md:scale-110" />
 
           </div>
         </div>

@@ -6,6 +6,7 @@ import trazosSvg from '../assets/shortener/accent-right.svg'
 import simboloSvg from '../assets/shortener/icon-link.svg'
 
 const API_URL = import.meta.env.VITE_API_URL as string
+const API_DOCS = 'https://github.com/M4NUEL-CERON/CuteURL_Backend#api'
 
 export default function Shortener() {
   const { lang } = useApp()
@@ -16,17 +17,21 @@ export default function Shortener() {
   const [error, setError]       = useState('')
   const [loading, setLoading]   = useState(false)
   const [copied, setCopied]     = useState(false)
+  const [waking, setWaking]     = useState(false)
 
   async function handleShorten(e: React.FormEvent) {
     e.preventDefault()
     setError('')
     setShortUrl('')
     setLoading(true)
+    // The free-tier API sleeps when idle; say so instead of looking broken.
+    const wakeTimer = setTimeout(() => setWaking(true), 3000)
     try {
       const res = await fetch(`${API_URL}/shorten`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: inputUrl }),
+        signal: AbortSignal.timeout(90_000),
       })
       if (!res.ok) { setError(tr.errorInvalid); return }
       const data = await res.json() as { shortUrl: string }
@@ -34,6 +39,8 @@ export default function Shortener() {
     } catch {
       setError(tr.errorConn)
     } finally {
+      clearTimeout(wakeTimer)
+      setWaking(false)
       setLoading(false)
     }
   }
@@ -55,7 +62,7 @@ export default function Shortener() {
                className="hidden lg:block absolute -right-10 top-1/2 -translate-y-1/2" />
 
           <div
-            className="bg-white/85 backdrop-blur-xl border border-[rgba(79,70,229,0.12)] rounded-3xl p-12"
+            className="bg-white/85 backdrop-blur-xl border border-[rgba(79,70,229,0.12)] rounded-3xl p-6 sm:p-12"
             style={{ boxShadow: '0 0 80px rgba(79,70,229,0.08)' }}
           >
             <h2 className="flex items-center justify-start gap-2 font-[Patrick_Hand] text-[1.8rem] text-left mb-2"
@@ -72,8 +79,7 @@ export default function Shortener() {
                 value={inputUrl}
                 onChange={e => setInputUrl(e.target.value)}
                 required
-                autoFocus
-                className="flex-1 w-full px-5 py-4 rounded-[14px] border border-[rgba(79,70,229,0.12)] bg-white font-[Inter] text-[#293353] text-[0.97rem] outline-none transition-all focus:border-primary focus:ring-[3px] focus:ring-primary/10 placeholder:text-[rgba(79,70,229,0.3)]"
+                className="flex-1 w-full px-5 py-4 rounded-[14px] border border-[rgba(79,70,229,0.12)] bg-white font-[Inter] text-[#293353] text-[0.97rem] outline-none transition-all focus:border-primary focus:ring-[3px] focus:ring-primary/10 placeholder:text-[#9AA1C4]"
               />
               <button
                 type="submit"
@@ -88,11 +94,16 @@ export default function Shortener() {
             </form>
 
             <p className="font-[Inter] text-left text-[0.75rem] mt-3" style={{ color: '#293353' }}>
-              {tr.tip}
+              {tr.tip}{' '}
+              <a href={API_DOCS} target="_blank" rel="noreferrer" className="text-primary underline underline-offset-2 hover:opacity-75">{tr.tipLink}</a>
             </p>
 
+            {waking && (
+              <p role="status" className="text-[0.88rem] text-left mt-3" style={{ color: '#5B5FC7' }}>{tr.waking}</p>
+            )}
+
             {error && (
-              <p className="text-[#ef4444] text-[0.88rem] text-center mt-3">{error}</p>
+              <p role="alert" className="text-[#dc2626] text-[0.88rem] text-left mt-3">{error}</p>
             )}
 
             {shortUrl && (
@@ -118,6 +129,9 @@ export default function Shortener() {
                   {copied ? tr.copied : tr.copy}
                 </button>
               </div>
+            )}
+            {shortUrl && (
+              <p className="font-[Inter] text-left text-[0.75rem] mt-2" style={{ color: '#7580A8' }}>{tr.expires}</p>
             )}
           </div>
         </div>
